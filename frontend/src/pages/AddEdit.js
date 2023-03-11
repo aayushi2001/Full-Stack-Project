@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import "./AddEdit.css";
 
 const initialState = {
   name: "",
   scanType: "",
   contact: "",
-  date: new Date()
+  date: new Date(),
 };
 
 const AddEdit = () => {
   const [state, setState] = useState(initialState);
-  
-
 
   const history = useNavigate();
 
@@ -24,7 +22,7 @@ const AddEdit = () => {
     if (id) {
       getSingleUser(id);
     }
-  }, [id])
+  }, [id]);
 
   const getSingleUser = async (id) => {
     const response = await axios.get(`http://localhost:5000/user/${id}`);
@@ -35,7 +33,7 @@ const AddEdit = () => {
 
   const addUser = async () => {
     const response = await axios.post("http://localhost:5000/user", state);
-   
+
     if (response.status === 200) {
       toast.success(response.data);
     }
@@ -58,15 +56,12 @@ const AddEdit = () => {
       } else {
         await updateUser(state, id);
       }
-     
+
       history("/home");
-
     }
-
   };
   const handleInputChange = (e) => {
-
-    let { name, value}  = e.target;
+    let { name, value } = e.target;
 
     setState({ ...state, [name]: value });
   };
@@ -91,14 +86,18 @@ const AddEdit = () => {
           value={state.name}
         />
         <label htmlFor="scanType">ScanType</label>
-       
-        <select name="scanType" id="scanType"  onChange={handleInputChange}
-          value={state.scanType}>
-            <option >Please Select the Scan</option>
-  <option >MRI Scan</option>
-  <option >CT Scan</option>
-  <option >X-Ray</option>
-</select>
+
+        <select
+          name="scanType"
+          id="scanType"
+          onChange={handleInputChange}
+          value={state.scanType}
+        >
+          <option>Please Select the Scan</option>
+          <option>MRI Scan</option>
+          <option>CT Scan</option>
+          <option>X-Ray</option>
+        </select>
         <label htmlFor="contact">Contact</label>
         <input
           type="number"
