@@ -25,14 +25,14 @@ const AddEdit = () => {
   }, [id]);
 
   const getSingleUser = async (id) => {
-    const response = await axios.get(`http://localhost:5000/user/${id}`);
+    const response = await axios.get(`http://localhost:8080/user/${id}`);
     if (response.status === 200) {
       setState({ ...response.data[0] });
     }
   };
 
   const addUser = async () => {
-    const response = await axios.post("http://localhost:5000/user", state);
+    const response = await axios.post("http://localhost:8080/user", state);
 
     if (response.status === 200) {
       toast.success(response.data);
@@ -40,7 +40,7 @@ const AddEdit = () => {
   };
 
   const updateUser = async (data, id) => {
-    const response = await axios.put(`http://localhost:5000/user/${id}`, data);
+    const response = await axios.put(`http://localhost:8080/user/${id}`, data);
     if (response.status === 200) {
       toast.success(response.data);
     }

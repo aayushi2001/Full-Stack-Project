@@ -19,15 +19,15 @@ For updating information of the user
 APIs used can be checked via postman
 
 Adding information of the user 
-                              axios.post("http://localhost:5000/user")
+                              axios.post("http://localhost:8080/user")
 
 ![image](https://user-images.githubusercontent.com/80510950/224492496-0b516e98-e196-4cce-acc0-f7659468292d.png)
 
 Getting information about all the users 
-                                       axios.get("http://localhost:5000/users")
+                                       axios.get("http://localhost:8080/users")
 
 View information of a selected single user 
-                                          axios.get("http://localhost:5000/user/${id}")
+                                          axios.get("http://localhost:8080/user/${id}")
                                           
 Updating information about a user
-                                 axios.put("http://localhost:5000/user/${id}")
+                                 axios.put("http://localhost:8080/user/${id}")

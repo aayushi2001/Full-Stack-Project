@@ -15,7 +15,7 @@ const View = () => {
   }, [id]);
 
   const getSingleUser = async (id) => {
-    const response = await axios.get(`http://localhost:5000/user/${id}`);
+    const response = await axios.get(`http://localhost:8080/user/${id}`);
     if (response.status === 200) {
       setUser({ ...response.data[0] });
     }
