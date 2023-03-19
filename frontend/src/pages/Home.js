@@ -6,49 +6,42 @@ import axios from "axios";
 
 const Home = () => {
   const [data, setData] = useState([]);
-  const [newName, setnewName] = useState("");
-
-  useEffect(() => {
-    if (data.date === new Date()) {
-      const index = "In Progress";
-      setnewName(index);
-    } else {
-      const index = "Queued";
-      setnewName(index);
-    }
-  }, [data.date]);
+  
   useEffect(() => {
     getUsers();
+    console.log(data)
   }, []);
 
   const getUsers = async () => {
     const response = await axios.get("http://localhost:8080/users");
-    if (response.status === 200) {
-      setData(response.data);
+    setData(response.data.data)
+   
+    if (response.status === 201) {
+      setData(response.data.data);
     }
   };
 
   const onDeleteUser = async (id) => {
     if (window.confirm("Are you sure you wanted to delete that user")) {
       const response = await axios.delete(`http://localhost:8080/user/${id}`);
-      if (response.status === 200) {
-        toast.success(response.data);
-        getUsers();
+      if (response.status === 201) {
+        toast.success(response.data.data);
+        
       }
+      getUsers();
     }
   };
-  console.log("data=>", data);
   return (
     <div style={{ marginTop: "150px" }}>
       <table className="styled-table">
         <thead>
           <tr>
             <th style={{ textAlign: "center " }}>No.</th>
-            <th style={{ textAlign: "center " }}>Name</th>
-            <th style={{ textAlign: "center " }}>ScanType</th>
-            <th style={{ textAlign: "center " }}>Contact</th>
+            <th style={{ textAlign: "center " }}>RepositoryName</th>
+            <th style={{ textAlign: "center " }}>Timestamp</th>
+            <th style={{ textAlign: "center " }}>Id</th>
             <th style={{ textAlign: "center " }}>Status</th>
-            <th style={{ textAlign: "center " }}>Action</th>
+            <th style={{ textAlign: "center ",display:"flex" }}>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -57,21 +50,21 @@ const Home = () => {
               return (
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>
-                  <td>{item.name}</td>
-                  <td>{item.scanType}</td>
-                  <td>{item.contact}</td>
-                  <td>{newName}</td>
-                  <td>
-                    <Link to={`/update/${item.id}`}>
+                  <th>{item.repositoryName}</th>
+                  <th>{item.queuedAt}</th>
+                  <th>{item._id}</th>
+                  <th >{item.Status}</th>
+                  <td style={{ textAlign: "center ",display:"flex" }}>
+                    <Link to={`/update/${item._id}`}>
                       <button className="btn btn-edit">Edit</button>
                     </Link>
                     <button
                       className="btn btn-delete"
-                      onClick={() => onDeleteUser(item.id)}
+                      onClick={() => onDeleteUser(item._id)}
                     >
                       Delete
                     </button>
-                    <Link to={`/view/${item.id}`}>
+                    <Link to={`/view/${item._id}`}>
                       <button className="btn btn-view">View</button>
                     </Link>
                   </td>

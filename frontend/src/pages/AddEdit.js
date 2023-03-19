@@ -4,67 +4,116 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "./AddEdit.css";
 
-const initialState = {
-  name: "",
-  scanType: "",
-  contact: "",
-  date: new Date(),
-};
-
 const AddEdit = () => {
-  const [state, setState] = useState(initialState);
+  const [status, addsetStatus] = useState("");
+  const [statuses, updatesetStatus] = useState("");
+  const [repoName, addsetRepoName] = useState("");
+  const [repoNames, updatesetsRepoName] = useState("");
+  const [queuedAt, addsetQueuedAt] = useState("");
+  const [queuedAts, updatesetQueuedAt] = useState("");
+  const [scanningAt, addsetscanningAt] = useState("");
+  const [scanningAts, updatesetscanningAt] = useState("");
+  const [finishedAt, addsetFinishedAt] = useState("");
+  const [finishedAts, updatesetFinishedAt] = useState("");
+  const [type, addsettype] = useState("");
+  const [types, updatesettype] = useState("");
+  const [ruleId, addsetRuleId] = useState("");
+  const [ruleIds, updatesetRuleId] = useState("");
+  const [path, addsetPath] = useState("");
+  const [paths, updatesetPath] = useState("");
+  const [line, addsetLine] = useState("");
+  const [lines, updatesetLine] = useState("");
+  const [description, addsetDescription] = useState("");
+  const [descriptions, updatesetDescription] = useState("");
+  const [severity, addsetSeverity] = useState("");
+  const [severitys, updatesetSeverity] = useState("");
+  const [data, setData] = useState([]);
 
   const history = useNavigate();
 
   const { id } = useParams();
 
   useEffect(() => {
-    if (id) {
-      getSingleUser(id);
-    }
-  }, [id]);
+    getUsers();
+  }, []);
+  const getUsers = async () => {
+    const response = await axios.get("http://localhost:8080/users");
+    setData(response.data.data);
+    const temp = JSON.parse(JSON.stringify(response.data.data));
 
-  const getSingleUser = async (id) => {
-    const response = await axios.get(`http://localhost:8080/user/${id}`);
-    if (response.status === 200) {
-      setState({ ...response.data[0] });
+    for (let i = 0; i < temp.length; i++) {
+      if (id === temp[i]["_id"]) updatesetsRepoName(temp[i]["repositoryName"]);
+      updatesetQueuedAt(temp[i]["queuedAt"]);
+      updatesetPath(temp[i]["path"]);
+      updatesetStatus(temp[i]["Status"]);
+      updatesetLine(temp[i]["line"]);
+      updatesetFinishedAt(temp[i]["finishedAt"]);
+      updatesetDescription(temp[i]["description"]);
+      updatesetRuleId(temp[i]["ruleID"]);
+      updatesetSeverity(temp[i]["severity"]);
+      updatesetscanningAt(temp[i]["scanningAt"]);
+      updatesettype(temp[i]["type"]);
+    }
+    if (response.status === 201) {
+      setData(response.data.data);
     }
   };
 
   const addUser = async () => {
-    const response = await axios.post("http://localhost:8080/user", state);
-
-    if (response.status === 200) {
+    const response = await axios.post("http://localhost:8080/user", {
+      Status: status,
+      repositoryName: repoName,
+      type: type,
+      ruleID: ruleId,
+      path: path,
+      line: line,
+      description: description,
+      severity: severity,
+      queuedAt: queuedAt,
+      scanningAt: scanningAt,
+      finishedAt: finishedAt,
+    });
+    if (response.status === 201) {
       toast.success(response.data);
+      addsetRepoName("");
     }
+  };
+  const setValueData = (event, func) => {
+    func(event.target.value);
   };
 
   const updateUser = async (data, id) => {
     const response = await axios.put(`http://localhost:8080/user/${id}`, data);
-    if (response.status === 200) {
-      toast.success(response.data);
+    if (response.status === 201) {
+      toast.success(response.data.data);
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (!state.name || !state.scanType || !state.contact) {
-      toast.error("Please provide value into each input field");
+    if (!id) {
+      addUser();
     } else {
-      if (!id) {
-        await addUser();
-      } else {
-        await updateUser(state, id);
-      }
-
-      history("/home");
+      updateUser(
+        {
+          Status: statuses,
+          type: types,
+          repositoryName: repoNames,
+          ruleID: ruleIds,
+          path: paths,
+          line: lines,
+          description: descriptions,
+          severity: severitys,
+          queuedAt: queuedAts,
+          scanningAt: scanningAts,
+          finishedAt: finishedAts,
+        },
+        id
+      );
     }
+    history("/home");
   };
-  const handleInputChange = (e) => {
-    let { name, value } = e.target;
 
-    setState({ ...state, [name]: value });
-  };
   return (
     <div style={{ marginTop: "100px" }}>
       <form
@@ -76,37 +125,127 @@ const AddEdit = () => {
         }}
         onSubmit={handleSubmit}
       >
-        <label htmlFor="name">Name</label>
+      
+        <label htmlFor="name">Repository Name</label>
         <input
           type="text"
-          id="name"
-          name="name"
-          placeholder="Enter Name ..."
-          onChange={handleInputChange}
-          value={state.name}
+          value={id ? repoNames : repoName}
+          placeholder="Enter Repository Name"
+          onChange={(e) => {
+            id
+              ? setValueData(e, updatesetsRepoName)
+              : setValueData(e, addsetRepoName);
+          }}
         />
-        <label htmlFor="scanType">ScanType</label>
+        <label htmlFor="scanType">Status</label>
 
         <select
-          name="scanType"
+          name="status"
           id="scanType"
-          onChange={handleInputChange}
-          value={state.scanType}
+          onChange={(e) => {
+            id
+              ? setValueData(e, updatesetStatus)
+              : setValueData(e, addsetStatus);
+          }}
+          value={id ? statuses : status}
         >
-          <option>Please Select the Scan</option>
-          <option>MRI Scan</option>
-          <option>CT Scan</option>
-          <option>X-Ray</option>
+          <option>Status </option>
+          <option>Queued</option>
+          <option>In Progress</option>
+          <option>Success</option>
+          <option>Failure</option>
         </select>
-        <label htmlFor="contact">Contact</label>
+        <label htmlFor="queuedAt">QueuedAt</label>
+        <input
+          type="date"
+          value={id ? queuedAts : queuedAt}
+          onChange={(e) => {
+            id
+              ? setValueData(e, updatesetQueuedAt)
+              : setValueData(e, addsetQueuedAt);
+          }}
+        />
+        <label htmlFor="scanningAt">ScanningAt</label>
+        <input
+          type="date"
+          value={id ? scanningAts : scanningAt}
+          onChange={(e) => {
+            id
+              ? setValueData(e, updatesetscanningAt)
+              : setValueData(e, addsetscanningAt);
+          }}
+        />
+        <label htmlFor="finishedAt">FinishedAt</label>
+        <input
+          type="date"
+          value={id ? finishedAts : finishedAt}
+          onChange={(e) => {
+            id
+              ? setValueData(e, updatesetFinishedAt)
+              : setValueData(e, addsetFinishedAt);
+          }}
+        />
+        <label htmlFor="type">Type</label>
+        <input
+          type="text"
+          value={id ? types : type}
+          placeholder="Enter type"
+          onChange={(e) => {
+            id ? setValueData(e, updatesettype) : setValueData(e, addsettype);
+          }}
+        />
+        <label htmlFor="ruleID">Rule ID</label>
+        <input
+          type="text"
+          value={id ? ruleIds : ruleId}
+          placeholder="Enter Rule ID"
+          onChange={(e) => {
+            id
+              ? setValueData(e, updatesetRuleId)
+              : setValueData(e, addsetRuleId);
+          }}
+        />
+        <label htmlFor="path">Path</label>
+        <input
+          type="text"
+          value={id ? paths : path}
+          placeholder="Enter Path"
+          onChange={(e) => {
+            id ? setValueData(e, updatesetPath) : setValueData(e, addsetPath);
+          }}
+        />
+        <label htmlFor="line">Line</label>
         <input
           type="number"
-          id="contact"
-          name="contact"
-          placeholder="Enter Contact No. ..."
-          onChange={handleInputChange}
-          value={state.contact}
+          value={id ? lines : line}
+          placeholder="Enter Line"
+          onChange={(e) => {
+            id ? setValueData(e, updatesetLine) : setValueData(e, addsetLine);
+          }}
         />
+        <label htmlFor="description">Description</label>
+        <input
+          type="text"
+          value={id ? descriptions : description}
+          placeholder="Enter Description"
+          onChange={(e) => {
+            id
+              ? setValueData(e, updatesetDescription)
+              : setValueData(e, addsetDescription);
+          }}
+        />
+        <label htmlFor="severity">Severity</label>
+        <input
+          type="text"
+          value={id ? severitys : severity}
+          placeholder="Enter Severity"
+          onChange={(e) => {
+            id
+              ? setValueData(e, updatesetSeverity)
+              : setValueData(e, addsetSeverity);
+          }}
+        />
+
         <input type="submit" value={id ? "Update" : "Add"} />
       </form>
     </div>

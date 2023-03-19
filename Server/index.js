@@ -1,7 +1,8 @@
 import express from "express";
 import bodyParsor from "body-parser";
 import cors from "cors";
-
+import mongoose from "mongoose";
+import db from "./db/db.js";
 import userRoutes from "./routes/users.js";
 
 const app = express();
@@ -9,6 +10,7 @@ const port = 8080;
 
 app.use(bodyParsor.json());
 app.use(cors());
+db();
 
 app.use("/", userRoutes);
 

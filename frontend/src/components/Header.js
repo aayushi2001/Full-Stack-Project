@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import "./Header.css";
 
 const Header = () => {
-  const [activeTab, setActiveTab] = useState("AddUser");
+  const [activeTab, setActiveTab] = useState("");
 
   const location = useLocation();
 

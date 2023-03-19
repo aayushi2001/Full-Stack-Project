@@ -16,9 +16,9 @@ const View = () => {
 
   const getSingleUser = async (id) => {
     const response = await axios.get(`http://localhost:8080/user/${id}`);
-    if (response.status === 200) {
-      setUser({ ...response.data[0] });
-    }
+    setUser(response.data.data)
+    console.log(response.data.data)
+   
   };
   return (
     <div style={{ marginTop: "150px" }}>
@@ -30,18 +30,20 @@ const View = () => {
           <table className="styled-table">
             <thead>
               <tr>
-                <th style={{ textAlign: "center " }}>Id</th>
-                <th style={{ textAlign: "center " }}>Name</th>
-                <th style={{ textAlign: "center " }}>ScanType</th>
-                <th style={{ textAlign: "center " }}>Contact</th>
+                <th style={{ textAlign: "center " }}>Rule ID</th>
+                <th style={{ textAlign: "center " }}>Description</th>
+                <th style={{ textAlign: "center " }}>Severity</th>
+                <th style={{ textAlign: "center " }}>Path Name</th>
+                <th style={{ textAlign: "center " }}>Line Number</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>{id}</td>
-                <td>{user && user.name}</td>
-                <td>{user && user.scanType}</td>
-                <td> {user && user.contact}</td>
+                <td>{user && user.ruleID}</td>
+                <td>{user && user.description}</td>
+                <td>{user && user.severity}</td>
+                <td>{user && user.path}</td>
+                <td> {user && user.line}</td>
               </tr>
             </tbody>
           </table>

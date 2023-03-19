@@ -1,36 +1,63 @@
-import { v4 as uuid } from "uuid";
+import User from "../modal/user.js";
 
-let users = [];
-
-export const getUsers = (req, res) => {
-  res.send(users);
+export const getUsers = async (req, res) => {
+  try {
+    const user = await User.find();
+    res.status(201).json({
+      Success: true,
+      data: user,
+    });
+  } catch (err) {
+    res.status(404).json({ message: `err in getting users ${err}` });
+  }
 };
 
-export const createUser = (req, res) => {
-  const user = req.body;
-  users.push({ ...user, id: uuid() }); // using uuid for different users
-
-  res.send(`User added successfully`);
+export const createUser = async (req, res) => {
+  try {
+    const user = await User.create(req.body);
+    res.status(201).json({
+      Success: true,
+      data: user,
+    });
+  } catch (err) {
+    res.status(404).json({ message: `err in creating user ${err}` });
+  }
 };
 
-export const getUser = (req, res) => {
-  const foundUser = users.filter((user) => user.id === req.params.id);
-
-  res.send(foundUser);
+export const getUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    res.status(201).json({
+      Success: true,
+      data: user,
+    });
+  } catch (err) {
+    res.status(404).json({ message: `err in getting single user ${err}` });
+  }
 };
 
-export const deleteUser = (req, res) => {
-  users = users.filter((user) => user.id !== req.params.id); // params => for single id
-  res.send("User deleted successfully");
+export const deleteUser = async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.id);
+    res.status(201).json({
+      Success: true,
+      data: user,
+    });
+  } catch (err) {
+    res.status(404).json({ message: `err in deleteing user ${err}` });
+  }
 };
 
-export const updateUser = (req, res) => {
-  const user = users.find((user) => user.id === req.params.id);
-
-  user.name = req.body.name;
-  user.scanType = req.body.scanType;
-  user.contact = req.body.contact;
-  user.result = req.body.result;
-
-  res.send("User updated successfully");
+export const updateUser = async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.params.id, {
+      $set: req.body,
+    });
+    res.status(201).json({
+      Success: true,
+      data: user,
+    });
+  } catch (err) {
+    res.status(404).json({ message: `err in updating user ${err}` });
+  }
 };
