@@ -2,19 +2,19 @@
 
 First Screen displaying a form 
 
-![image](https://user-images.githubusercontent.com/80510950/224491669-c8becf16-94a0-4d87-b83b-7094325a8bde.png)
+![image](https://user-images.githubusercontent.com/80510950/226200170-cc1507e6-9ede-4c34-9e9d-2dd75d58c521.png)
 
 Second Screen
 
-![image](https://user-images.githubusercontent.com/80510950/224491852-7b34fe27-9f6e-44c5-8618-1ace5297d236.png)
+![image](https://user-images.githubusercontent.com/80510950/226200633-80ce5d68-4132-44e6-95b5-f647ef29594d.png)
 
 Third Screen
 
-![image](https://user-images.githubusercontent.com/80510950/224491903-b06253ea-bc10-4420-b127-2c004f113d77.png)
+![image](https://user-images.githubusercontent.com/80510950/226200669-908b9ef9-921c-4dff-944f-3d377b0b69aa.png)
 
 For updating information of the user
 
-![image](https://user-images.githubusercontent.com/80510950/224491991-261509c7-58e4-48a9-bc1d-dded943199fd.png)
+![image](https://user-images.githubusercontent.com/80510950/226200717-6a6bcbc9-a4e0-4875-ae7d-984a30760e5f.png)
 
 APIs used can be checked via postman
 
