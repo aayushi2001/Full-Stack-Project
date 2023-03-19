@@ -6,16 +6,16 @@ import axios from "axios";
 
 const Home = () => {
   const [data, setData] = useState([]);
-  
+
   useEffect(() => {
     getUsers();
-    console.log(data)
+    console.log(data);
   }, []);
 
   const getUsers = async () => {
     const response = await axios.get("http://localhost:8080/users");
-    setData(response.data.data)
-   
+    setData(response.data.data);
+
     if (response.status === 201) {
       setData(response.data.data);
     }
@@ -26,7 +26,6 @@ const Home = () => {
       const response = await axios.delete(`http://localhost:8080/user/${id}`);
       if (response.status === 201) {
         toast.success(response.data.data);
-        
       }
       getUsers();
     }
@@ -41,7 +40,7 @@ const Home = () => {
             <th style={{ textAlign: "center " }}>Timestamp</th>
             <th style={{ textAlign: "center " }}>Id</th>
             <th style={{ textAlign: "center " }}>Status</th>
-            <th style={{ textAlign: "center ",display:"flex" }}>Action</th>
+            <th style={{ textAlign: "center ", display: "flex" }}>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -53,8 +52,8 @@ const Home = () => {
                   <th>{item.repositoryName}</th>
                   <th>{item.queuedAt}</th>
                   <th>{item._id}</th>
-                  <th >{item.Status}</th>
-                  <td style={{ textAlign: "center ",display:"flex" }}>
+                  <th>{item.Status}</th>
+                  <td style={{ textAlign: "center ", display: "flex" }}>
                     <Link to={`/update/${item._id}`}>
                       <button className="btn btn-edit">Edit</button>
                     </Link>

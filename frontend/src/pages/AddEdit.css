@@ -12,6 +12,10 @@ select {
   box-sizing: border-box;
 }
 
+td {
+  text-align: left;
+}
+
 input[type="submit"] {
   width: 100%;
   background-color: #85acd6;

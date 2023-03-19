@@ -125,128 +125,209 @@ const AddEdit = () => {
         }}
         onSubmit={handleSubmit}
       >
-      
-        <label htmlFor="name">Repository Name</label>
-        <input
-          type="text"
-          value={id ? repoNames : repoName}
-          placeholder="Enter Repository Name"
-          onChange={(e) => {
-            id
-              ? setValueData(e, updatesetsRepoName)
-              : setValueData(e, addsetRepoName);
-          }}
-        />
-        <label htmlFor="scanType">Status</label>
+        <table>
+          <tr>
+            <td>
+              <label htmlFor="name">Repository Name</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                value={id ? repoNames : repoName}
+                placeholder="Enter Repository Name"
+                onChange={(e) => {
+                  id
+                    ? setValueData(e, updatesetsRepoName)
+                    : setValueData(e, addsetRepoName);
+                }}
+              />
+            </td>
+          </tr>
 
-        <select
-          name="status"
-          id="scanType"
-          onChange={(e) => {
-            id
-              ? setValueData(e, updatesetStatus)
-              : setValueData(e, addsetStatus);
-          }}
-          value={id ? statuses : status}
-        >
-          <option>Status </option>
-          <option>Queued</option>
-          <option>In Progress</option>
-          <option>Success</option>
-          <option>Failure</option>
-        </select>
-        <label htmlFor="queuedAt">QueuedAt</label>
-        <input
-          type="date"
-          value={id ? queuedAts : queuedAt}
-          onChange={(e) => {
-            id
-              ? setValueData(e, updatesetQueuedAt)
-              : setValueData(e, addsetQueuedAt);
-          }}
-        />
-        <label htmlFor="scanningAt">ScanningAt</label>
-        <input
-          type="date"
-          value={id ? scanningAts : scanningAt}
-          onChange={(e) => {
-            id
-              ? setValueData(e, updatesetscanningAt)
-              : setValueData(e, addsetscanningAt);
-          }}
-        />
-        <label htmlFor="finishedAt">FinishedAt</label>
-        <input
-          type="date"
-          value={id ? finishedAts : finishedAt}
-          onChange={(e) => {
-            id
-              ? setValueData(e, updatesetFinishedAt)
-              : setValueData(e, addsetFinishedAt);
-          }}
-        />
-        <label htmlFor="type">Type</label>
-        <input
-          type="text"
-          value={id ? types : type}
-          placeholder="Enter type"
-          onChange={(e) => {
-            id ? setValueData(e, updatesettype) : setValueData(e, addsettype);
-          }}
-        />
-        <label htmlFor="ruleID">Rule ID</label>
-        <input
-          type="text"
-          value={id ? ruleIds : ruleId}
-          placeholder="Enter Rule ID"
-          onChange={(e) => {
-            id
-              ? setValueData(e, updatesetRuleId)
-              : setValueData(e, addsetRuleId);
-          }}
-        />
-        <label htmlFor="path">Path</label>
-        <input
-          type="text"
-          value={id ? paths : path}
-          placeholder="Enter Path"
-          onChange={(e) => {
-            id ? setValueData(e, updatesetPath) : setValueData(e, addsetPath);
-          }}
-        />
-        <label htmlFor="line">Line</label>
-        <input
-          type="number"
-          value={id ? lines : line}
-          placeholder="Enter Line"
-          onChange={(e) => {
-            id ? setValueData(e, updatesetLine) : setValueData(e, addsetLine);
-          }}
-        />
-        <label htmlFor="description">Description</label>
-        <input
-          type="text"
-          value={id ? descriptions : description}
-          placeholder="Enter Description"
-          onChange={(e) => {
-            id
-              ? setValueData(e, updatesetDescription)
-              : setValueData(e, addsetDescription);
-          }}
-        />
-        <label htmlFor="severity">Severity</label>
-        <input
-          type="text"
-          value={id ? severitys : severity}
-          placeholder="Enter Severity"
-          onChange={(e) => {
-            id
-              ? setValueData(e, updatesetSeverity)
-              : setValueData(e, addsetSeverity);
-          }}
-        />
+          <tr>
+            <td>
+              <label htmlFor="scanType">Status</label>
+            </td>
+            <td>
+              <select
+                name="status"
+                id="scanType"
+                onChange={(e) => {
+                  id
+                    ? setValueData(e, updatesetStatus)
+                    : setValueData(e, addsetStatus);
+                }}
+                value={id ? statuses : status}
+              >
+                <option>Status </option>
+                <option>Queued</option>
+                <option>In Progress</option>
+                <option>Success</option>
+                <option>Failure</option>
+              </select>
+            </td>
+          </tr>
 
-        <input type="submit" value={id ? "Update" : "Add"} />
+          <tr>
+            <td>
+              <label htmlFor="queuedAt">QueuedAt</label>
+            </td>
+            <td>
+              <input
+                type="date"
+                value={id ? queuedAts : queuedAt}
+                onChange={(e) => {
+                  id
+                    ? setValueData(e, updatesetQueuedAt)
+                    : setValueData(e, addsetQueuedAt);
+                }}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label htmlFor="scanningAt">ScanningAt</label>
+            </td>
+            <td>
+              <input
+                type="date"
+                value={id ? scanningAts : scanningAt}
+                onChange={(e) => {
+                  id
+                    ? setValueData(e, updatesetscanningAt)
+                    : setValueData(e, addsetscanningAt);
+                }}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label htmlFor="finishedAt">FinishedAt</label>
+            </td>
+            <td>
+              <input
+                type="date"
+                value={id ? finishedAts : finishedAt}
+                onChange={(e) => {
+                  id
+                    ? setValueData(e, updatesetFinishedAt)
+                    : setValueData(e, addsetFinishedAt);
+                }}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label htmlFor="type">Type</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                value={id ? types : type}
+                placeholder="Enter type"
+                onChange={(e) => {
+                  id
+                    ? setValueData(e, updatesettype)
+                    : setValueData(e, addsettype);
+                }}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label htmlFor="ruleID">Rule ID</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                value={id ? ruleIds : ruleId}
+                placeholder="Enter Rule ID"
+                onChange={(e) => {
+                  id
+                    ? setValueData(e, updatesetRuleId)
+                    : setValueData(e, addsetRuleId);
+                }}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label htmlFor="path">Path</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                value={id ? paths : path}
+                placeholder="Enter Path"
+                onChange={(e) => {
+                  id
+                    ? setValueData(e, updatesetPath)
+                    : setValueData(e, addsetPath);
+                }}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              {" "}
+              <label htmlFor="line">Line</label>
+            </td>
+            <td>
+              <input
+                type="number"
+                value={id ? lines : line}
+                placeholder="Enter Line"
+                onChange={(e) => {
+                  id
+                    ? setValueData(e, updatesetLine)
+                    : setValueData(e, addsetLine);
+                }}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              {" "}
+              <label htmlFor="description">Description</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                value={id ? descriptions : description}
+                placeholder="Enter Description"
+                onChange={(e) => {
+                  id
+                    ? setValueData(e, updatesetDescription)
+                    : setValueData(e, addsetDescription);
+                }}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label htmlFor="severity">Severity</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                value={id ? severitys : severity}
+                placeholder="Enter Severity"
+                onChange={(e) => {
+                  id
+                    ? setValueData(e, updatesetSeverity)
+                    : setValueData(e, addsetSeverity);
+                }}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              {" "}
+              <input type="submit" value={id ? "Update" : "Add"} />
+            </td>
+          </tr>
+        </table>
       </form>
     </div>
   );

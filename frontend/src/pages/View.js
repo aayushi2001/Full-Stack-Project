@@ -16,15 +16,14 @@ const View = () => {
 
   const getSingleUser = async (id) => {
     const response = await axios.get(`http://localhost:8080/user/${id}`);
-    setUser(response.data.data)
-    console.log(response.data.data)
-   
+    setUser(response.data.data);
+    console.log(response.data.data);
   };
   return (
     <div style={{ marginTop: "150px" }}>
       <div className="card">
         <div className="card-header">
-          <p>User Contact Detail</p>
+          <p>User Details</p>
         </div>
         <div className="container">
           <table className="styled-table">
@@ -43,7 +42,7 @@ const View = () => {
                 <td>{user && user.description}</td>
                 <td>{user && user.severity}</td>
                 <td>{user && user.path}</td>
-                <td> {user && user.line}</td>
+                <td>{user && user.line}</td>
               </tr>
             </tbody>
           </table>
