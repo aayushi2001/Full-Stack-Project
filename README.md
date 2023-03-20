@@ -16,18 +16,4 @@ For updating information of the user
 
 ![image](https://user-images.githubusercontent.com/80510950/226261235-87d2b43c-af44-4b60-b493-4901fe8b65a5.png)
 
-APIs used can be checked via postman
-
-Adding information of the user 
-                              axios.post("http://localhost:8080/user")
-
-![image](https://user-images.githubusercontent.com/80510950/224492496-0b516e98-e196-4cce-acc0-f7659468292d.png)
-
-Getting information about all the users 
-                                       axios.get("http://localhost:8080/users")
-
-View information of a selected single user 
-                                          axios.get("http://localhost:8080/user/${id}")
-                                          
-Updating information about a user
-                                 axios.put("http://localhost:8080/user/${id}")
+Database used: MongoDb
