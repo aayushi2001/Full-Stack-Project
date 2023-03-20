@@ -2,7 +2,7 @@
 
 First Screen displaying a form 
 
-![image](https://user-images.githubusercontent.com/80510950/226200170-cc1507e6-9ede-4c34-9e9d-2dd75d58c521.png)
+![image](https://user-images.githubusercontent.com/80510950/226261110-69a315ad-cf07-4b1e-823f-34aa3d2c9ca5.png)
 
 Second Screen
 
@@ -14,7 +14,7 @@ Third Screen
 
 For updating information of the user
 
-![image](https://user-images.githubusercontent.com/80510950/226200717-6a6bcbc9-a4e0-4875-ae7d-984a30760e5f.png)
+![image](https://user-images.githubusercontent.com/80510950/226261235-87d2b43c-af44-4b60-b493-4901fe8b65a5.png)
 
 APIs used can be checked via postman
 
